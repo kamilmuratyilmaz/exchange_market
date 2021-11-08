@@ -26,7 +26,7 @@
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
       <v-btn fab>
-        <router-link to="/about" style="color: white">Chart</router-link>
+        <router-link to="/admin" style="color: white">Admin</router-link>
       </v-btn>
       <v-btn fab>
         <router-link to="/" style="color: white">Home</router-link>
