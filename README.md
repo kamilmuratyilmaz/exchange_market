@@ -1,4 +1,6 @@
-<<<<<<< HEAD
+
+Exchange market site with candlestick graph and Alpha Vantage API
+
 # exchange-market
 
 ## Project setup
@@ -23,7 +25,3 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-=======
-# exchange_market
-Exchange market site with candlestick graph and Alpha Vantage API
->>>>>>> refs/remotes/origin/develop
