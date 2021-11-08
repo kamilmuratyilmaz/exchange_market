@@ -15,8 +15,8 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    SET_MARKET_SEARCH_RESULT(state, searchResults) {
-      state.searchResults = searchResults;
+    SET_MARKET_SEARCH_RESULT(state, companyNameSymbol) {
+      state.searchResults = companyNameSymbol;
     },
     SET_COMPANY_KEYWORD(state, keyword) {
       state.companyKeyword = keyword;
@@ -35,7 +35,17 @@ export default new Vuex.Store({
           },
         })
         .then((res) => {
-          commit("SET_MARKET_SEARCH_RESULT", res.data["bestMatches"]);
+          let apiData = res.data["bestMatches"];
+          let companyNameSymbol = [];
+          apiData.forEach((apiData) => {
+            let obj = new Object({
+              name: apiData["2. name"],
+              symbol: apiData["1. symbol"],
+            });
+            companyNameSymbol.push(obj);
+          });
+          commit("SET_MARKET_SEARCH_RESULT", companyNameSymbol.slice(0, 5));
+          console.log(state.searchResults);
         })
         .catch((err) => console.log(err));
     },
