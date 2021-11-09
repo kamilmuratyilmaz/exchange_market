@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    name: "candleStickGraph"
+    name: "CandleStickGraph"
 }
 </script>
 

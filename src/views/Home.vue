@@ -3,13 +3,13 @@
 </template>
 
 <script>
-import marketSearch from "@/components/marketSearch.vue";
+import MarketSearch from "@/components/MarketSearch.vue";
 
 export default {
   name: "Home",
 
   components: {
-    marketSearch,
+    MarketSearch,
   },
 };
 </script>

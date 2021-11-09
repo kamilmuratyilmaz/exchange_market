@@ -46,7 +46,7 @@
           Clear
           <v-icon right> mdi-close-circle </v-icon>
         </v-btn>
-        <v-btn @click="selectCompany">
+        <v-btn @click="selectCompany(searchResults.symbol)">
           Update
           <v-icon right> mdi-update </v-icon>
         </v-btn>
@@ -57,7 +57,7 @@
 <script>
 import { mapState, mapActions, mapMutations, mapGetters } from "vuex";
 export default {
-  name: "marketSearch",
+  name: "MarketSearch",
   data: () => ({
     searchInput: null,
     model: null,
@@ -82,13 +82,17 @@ export default {
     ...mapActions(["getCompanySearchResult"]),
     ...mapMutations(["SET_COMPANY_KEYWORD"]),
 
-    selectCompany() {
-      console.log(this.getNameSymbolFromResults);
+    selectCompany(companySymbol) {
+      this.$router.push({
+        name: "Chart",
+        params: { id: companySymbol },
+        query: { view: "daily" },
+      });
     },
   },
   watch: {
     searchInput() {
-      if (this.searchInput.length >= 3) {
+      if (this.searchInput.length >= 4) {
         this.$store.commit("SET_COMPANY_KEYWORD", this.searchInput);
         this.$store.dispatch("getCompanySearchResult");
       }

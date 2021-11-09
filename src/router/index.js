@@ -12,8 +12,8 @@ const routes = [
     children: [
       {
         path: ":id",
-        name: "chart",
-        component: () => import("../components/chart.vue"),
+        name: "Chart",
+        component: () => import("../components/Chart.vue"),
         props: true,
       },
     ],
