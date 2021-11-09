@@ -52,6 +52,7 @@
         </v-btn>
       </v-card-actions>
     </v-card>
+    <router-view></router-view>
   </v-container>
 </template>
 <script>
