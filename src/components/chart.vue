@@ -13,15 +13,19 @@
         <v-chip>Monthly</v-chip>
       </v-chip-group>
     </v-card-text>
-    <router-view></router-view>
+    <CandleStickGraph />
   </v-card>
 </template>
 
 <script>
+import CandleStickGraph from "@/components/CandleStickGraph.vue";
 export default {
   name: "Chart",
+  components: {
+    CandleStickGraph,
+  },
   data: () => ({
-    selection: 1,
+    selection: 0,
   }),
   watch: {
     selection() {

@@ -1,9 +1,11 @@
 <template>
-  <v-container> </v-container>
+  <h3>yeah</h3>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Admin",
+};
 </script>
 
 <style></style>

@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Admin from "../views/Admin.vue";
+import Chart from "../components/Chart.vue";
 
 Vue.use(VueRouter);
 
@@ -13,7 +15,7 @@ const routes = [
       {
         path: ":id",
         name: "Chart",
-        component: () => import("../components/Chart.vue"),
+        component: Chart,
         props: true,
       },
     ],
@@ -21,7 +23,7 @@ const routes = [
   {
     path: "/admin",
     name: "Admin",
-    component: () => import("../views/Admin.vue"),
+    component: Admin,
   },
 ];
 
