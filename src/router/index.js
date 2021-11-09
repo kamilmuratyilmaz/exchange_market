@@ -9,6 +9,14 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    children: [
+      {
+        path: ":id",
+        name: "chart",
+        component: () => import("../components/chart.vue"),
+        props: true,
+      },
+    ],
   },
   {
     path: "/admin",
