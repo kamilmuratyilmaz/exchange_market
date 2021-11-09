@@ -22,11 +22,9 @@
         target="_blank"
         text
       >
-        <span class="mr-2">Yeah </span>
-        <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
-      <v-btn fab>
-        <router-link to="/admin" style="color: white">Admin</router-link>
+      <v-btn fab color="white">
+        <router-link to="/admin" style="color: black">Admin</router-link>
       </v-btn>
       <v-btn fab>
         <router-link to="/" style="color: white">Home</router-link>
