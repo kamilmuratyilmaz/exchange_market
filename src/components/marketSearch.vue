@@ -47,7 +47,7 @@
           <v-icon right> mdi-close-circle </v-icon>
         </v-btn>
         <v-btn @click="selectCompany(model.symbol)">
-          Update
+          List Chart
           <v-icon right> mdi-update </v-icon>
         </v-btn>
       </v-card-actions>
