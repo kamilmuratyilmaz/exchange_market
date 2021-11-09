@@ -46,7 +46,7 @@
           Clear
           <v-icon right> mdi-close-circle </v-icon>
         </v-btn>
-        <v-btn @click="selectCompany(searchResults.symbol)">
+        <v-btn @click="selectCompany(model.symbol)">
           Update
           <v-icon right> mdi-update </v-icon>
         </v-btn>
