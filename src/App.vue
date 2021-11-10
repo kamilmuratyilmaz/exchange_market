@@ -16,13 +16,6 @@
       </div>
 
       <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-      </v-btn>
       <v-btn fab color="white">
         <router-link to="/admin" style="color: black">Admin</router-link>
       </v-btn>
@@ -42,5 +35,11 @@
 <script>
 export default {
   name: "App",
+
+  watch: {
+    $route(to, from) {
+      console.log(to, from);
+    },
+  },
 };
 </script>

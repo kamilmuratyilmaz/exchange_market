@@ -13,7 +13,7 @@ export default {
   watch: {
     chartType() {
       console.log(this.$route.query.view);
-      this.chartType = this.$route.query;
+      this.chartType = this.$route.query.view;
     },
   },
 };
