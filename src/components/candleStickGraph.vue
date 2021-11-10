@@ -1,5 +1,5 @@
 <template>
-  <v-container> {{ watchQuery }} </v-container>
+  <v-container> {{ sendQueryInstance }} </v-container>
 </template>
 
 <script>
