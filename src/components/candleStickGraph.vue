@@ -1,5 +1,5 @@
 <template>
-  <v-container> {{ chartType }} </v-container>
+  <v-container> {{ watchQuery }} </v-container>
 </template>
 
 <script>
@@ -7,13 +7,12 @@
 import * as d3 from "d3";
 export default {
   name: "CandleStickGraph",
-  data: () => ({
-    chartType: null,
-  }),
-  watch: {
-    chartType() {
-      console.log(this.$route.query.view);
-      this.chartType = this.$route.query.view;
+  data() {
+    return {};
+  },
+  computed: {
+    sendQueryInstance() {
+      return this.$route.query.view;
     },
   },
 };

@@ -99,5 +99,10 @@ export default {
       }
     },
   },
+  created() {
+    if (this.$route.params.id && this.searchResults === []) {
+      this.getCompanySearchResult(this.$route.params.id);
+    }
+  },
 };
 </script>
