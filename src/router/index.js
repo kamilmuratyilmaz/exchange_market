@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "../store";
 import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
@@ -9,6 +10,17 @@ const routes = [
     path: "/admin",
     name: "Admin",
     component: () => import("../views/Admin.vue"),
+    beforeEnter: (to, from, next) => {
+      if (store.state.isAdmin) next();
+      else {
+        store.commit("ALERT", true);
+        store.commit(
+          "TRACK_ROUTE",
+          `Unauthorized Attempt "/route-logs" -- ${new Date().toLocaleString()}`
+        );
+        next({ path: from.FullPath });
+      }
+    },
   },
   {
     path: "/",
