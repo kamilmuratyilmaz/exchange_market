@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <h3>{{ sendQuery }}</h3>
-    <v-btn @click="checkTimeSeriesFromQuery">Click</v-btn>
+    <v-btn @click="btnClick">Click</v-btn>
   </v-container>
 </template>
 
@@ -30,8 +30,10 @@ export default {
     ...mapActions(["getTimeSeriesData"]),
     ...mapMutations(["SET_MARKET_DATA"]),
     ...mapMutations(["SET_TIME_SERIES"]),
-    // eslint-disable-next-line prettier/prettier
-
+    btnClick() {
+      this.getTimeSeriesData();
+      console.log(this.marketData);
+    },
     checkTimeSeriesFromQuery() {
       this.companySymbolFromID(this.sendId);
       switch (this.sendQuery) {
@@ -47,8 +49,11 @@ export default {
       }
       console.log(this.timeSeries);
       console.log(this.$store.state.companySymbol);
-      this.getTimeSeriesData();
-      console.log(this.marketData);
+    },
+  },
+  watch: {
+    sendQuery() {
+      this.checkTimeSeriesFromQuery();
     },
   },
 };
