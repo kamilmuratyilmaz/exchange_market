@@ -32,7 +32,6 @@ export default {
     ...mapMutations(["SET_TIME_SERIES"]),
     btnClick() {
       this.getTimeSeriesData();
-      console.log(this.marketData);
     },
     checkTimeSeriesFromQuery() {
       this.companySymbolFromID(this.sendId);
@@ -48,12 +47,17 @@ export default {
           break;
       }
       console.log(this.timeSeries);
+      console.log(this.$store.state.timeSeriesTypeData);
       console.log(this.$store.state.companySymbol);
     },
   },
   watch: {
     sendQuery() {
       this.checkTimeSeriesFromQuery();
+      this.getTimeSeriesData();
+    },
+    marketData() {
+      console.log(this.marketData);
     },
   },
 };
