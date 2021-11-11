@@ -56,7 +56,7 @@
   </v-container>
 </template>
 <script>
-import { mapState, mapActions, mapMutations, mapGetters } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   name: "MarketSearch",
   data: () => ({
@@ -75,7 +75,6 @@ export default {
         };
       });
     },
-    ...mapGetters(["getNameSymbolFromResults"]),
     ...mapState(["searchResults"]),
     ...mapState(["companyKeyword"]),
   },
