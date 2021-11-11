@@ -8,6 +8,7 @@ export default new Vuex.Store({
   strict: true,
   state: {
     companyKeyword: "",
+    companySymbol: null,
     searchResults: [],
     apiURL: "https://alpha-vantage.p.rapidapi.com/query",
     headers: {
@@ -15,7 +16,8 @@ export default new Vuex.Store({
       "x-rapidapi-key": "5d3b9dd928mshd83e4ca030f3034p1e932ejsnaece4d46d226",
     },
     timeSeries: "TIME_SERIES_DAILY",
-    marketData: null,
+    timeSeriesData: null,
+    marketData: [],
   },
   mutations: {
     SET_MARKET_SEARCH_RESULT(state, companyNameSymbol) {
@@ -24,11 +26,22 @@ export default new Vuex.Store({
     SET_COMPANY_KEYWORD(state, keyword) {
       state.companyKeyword = keyword;
     },
+    SET_COMPANY_SYMBOL(state, companySymbolFromID) {
+      state.companySymbol = companySymbolFromID;
+    },
     SET_MARKET_DATA(state, seriesData) {
       state.marketData = seriesData;
     },
-    SET_TIME_SERIES(state, timeSeries) {
-      state.timeSeries = timeSeries;
+    SET_TIME_SERIES(state, timeSeriesType) {
+      state.timeSeries = timeSeriesType;
+      switch (timeSeriesType) {
+        case "TIME_SERIES_DAILY":
+          return (state.timeSeriesData = "Time Series (Daily)");
+        case "TIME_SERIES_WEEKLY":
+          return (state.timeSeriesData = "Weekly Time Series");
+        case "TIME_SERIES_MONTHLY":
+          return (state.timeSeriesData = "Monthly Time Series");
+      }
     },
   },
   actions: {
@@ -58,22 +71,22 @@ export default new Vuex.Store({
         })
         .catch((err) => console.log(err));
     },
-    getTimeSeries({ state, commit, getters }) {
-      commit("SET_DAILY", []);
+    getTimeSeriesData({ state, commit }) {
+      commit("SET_MARKET_DATA", []);
       return axios
         .get(`${state.apiURL}`, {
           headers: { ...state.headers },
           params: {
             function: `${state.timeSeries}`,
-            symbol: state.searchResults.symbol,
+            symbol: `${state.companySymbol}`,
             outputsize: "compact",
             datatype: "json",
           },
         })
         .then((res) => {
-          let seriesData = Object.keys(res[getters.timeSeriesType]).map(
-            (item) => ({
-              item: res[getters.timeSeries][item],
+          let seriesData = Object.keys(res[state.timeSeriesData]).map(
+            (dates) => ({
+              item: res[state.timeSeriesData][dates],
             })
           );
           seriesData = seriesData.slice(0, 100);
@@ -83,18 +96,15 @@ export default new Vuex.Store({
           console.error(err);
         });
     },
-  },
-  getters: {
-    timeSeriesType(state) {
-      switch (state.timeSeries) {
-        case "TIME_SERIES_DAILY":
-          return "Time Series (Daily)";
-        case "TIME_SERIES_WEEKLY":
-          return "Weekly Time Series";
-        case "TIME_SERIES_MONTHLY":
-          return "Monthly Time Series";
-      }
+    companySymbolFromID({ commit }, id) {
+      let companySymbolFromID = id;
+      commit("SET_COMPANY_SYMBOL", companySymbolFromID);
+    },
+    timeSeriesType({ commit }, input) {
+      let timeSeriesType = input;
+      commit("SET_TIME_SERIES", timeSeriesType);
     },
   },
+  getters: {},
   modules: {},
 });
