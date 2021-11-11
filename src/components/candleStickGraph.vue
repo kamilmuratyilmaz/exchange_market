@@ -54,7 +54,6 @@ export default {
   watch: {
     sendQuery() {
       this.checkTimeSeriesFromQuery();
-      this.getTimeSeriesData();
     },
     marketData() {
       console.log(this.marketData);
