@@ -16,7 +16,7 @@ export default new Vuex.Store({
       "x-rapidapi-key": "5d3b9dd928mshd83e4ca030f3034p1e932ejsnaece4d46d226",
     },
     timeSeries: "TIME_SERIES_DAILY",
-    timeSeriesData: null,
+    timeSeriesTypeData: null,
     marketData: [],
   },
   mutations: {
@@ -36,11 +36,11 @@ export default new Vuex.Store({
       state.timeSeries = timeSeriesType;
       switch (timeSeriesType) {
         case "TIME_SERIES_DAILY":
-          return (state.timeSeriesData = "Time Series (Daily)");
+          return (state.timeSeriesTypeData = "Time Series (Daily)");
         case "TIME_SERIES_WEEKLY":
-          return (state.timeSeriesData = "Weekly Time Series");
+          return (state.timeSeriesTypeData = "Weekly Time Series");
         case "TIME_SERIES_MONTHLY":
-          return (state.timeSeriesData = "Monthly Time Series");
+          return (state.timeSeriesTypeData = "Monthly Time Series");
       }
     },
   },
@@ -84,9 +84,9 @@ export default new Vuex.Store({
           },
         })
         .then((res) => {
-          let seriesData = Object.keys(res[state.timeSeriesData]).map(
-            (dates) => ({
-              item: res[state.timeSeriesData][dates],
+          let seriesData = Object.keys(res[state.timeSeriesTypeData]).map(
+            (index) => ({
+              item: res[state.timeSeriesTypeData][index],
             })
           );
           seriesData = seriesData.slice(0, 100);
