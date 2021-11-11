@@ -59,10 +59,6 @@ export default {
     marketData() {
       console.log(this.marketData);
     },
-    marketData() {
-      console.log(this.marketData);
-      this.getTimeSeriesData();
-    },
   },
 };
 </script>
