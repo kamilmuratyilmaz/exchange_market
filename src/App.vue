@@ -38,11 +38,11 @@ export default {
 
   watch: {
     $route(to, from) {
-      console.log(to, from);
-      let routeTrack = ` ${from.path} to ${
-        to.path
+      let routeTrack = ` ${from.path}/${to.query.view} to ${to.path}/${
+        to.query.view
       } -- ${new Date().toLocaleString()} `;
       this.$store.commit("TRACK_ROUTE", routeTrack);
+      console.log(routeTrack);
     },
   },
 };
