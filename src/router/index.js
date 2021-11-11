@@ -14,10 +14,10 @@ const routes = [
       if (store.state.alertStatus) next();
       else {
         store.commit("ALERT", true);
-        store.commit(
-          "TRACK_ROUTE",
-          `Unauthorized Attempt "/route-logs" -- ${new Date().toLocaleString()}`
-        );
+        store.commit("TRACK_ROUTE", {
+          warning: true,
+          log: `Unauthorized Attempt "/route-logs" -- ${new Date().toLocaleString()}`,
+        });
         next({ path: from.FullPath });
       }
     },

@@ -38,9 +38,13 @@ export default {
 
   watch: {
     $route(to, from) {
-      let routeTrack = `${from.path}/${to.query.view} to ${to.path}/${
-        to.query.view ? to.query.view : null
-      } -- ${new Date().toLocaleString()} `;
+      let routeTrack = {
+        name: `${new Date().toLocaleString("en-US")}`,
+        children: [
+          { name: `From : ${from.fullPath}` },
+          { name: `To : ${to.fullPath}` },
+        ],
+      };
       this.$store.commit("TRACK_ROUTE", routeTrack);
       console.log(routeTrack);
     },
