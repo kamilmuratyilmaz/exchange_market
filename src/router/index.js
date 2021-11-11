@@ -11,7 +11,7 @@ const routes = [
     name: "Admin",
     component: () => import("../views/Admin.vue"),
     beforeEnter: (to, from, next) => {
-      if (store.state.isAdmin) next();
+      if (store.state.alertStatus) next();
       else {
         store.commit("ALERT", true);
         store.commit(
