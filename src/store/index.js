@@ -14,6 +14,8 @@ export default new Vuex.Store({
       "x-rapidapi-host": "alpha-vantage.p.rapidapi.com",
       "x-rapidapi-key": "5d3b9dd928mshd83e4ca030f3034p1e932ejsnaece4d46d226",
     },
+    timeSeries: "TIME_SERIES_DAILY",
+    marketData: null,
   },
   mutations: {
     SET_MARKET_SEARCH_RESULT(state, companyNameSymbol) {
@@ -21,6 +23,12 @@ export default new Vuex.Store({
     },
     SET_COMPANY_KEYWORD(state, keyword) {
       state.companyKeyword = keyword;
+    },
+    SET_MARKET_DATA(state, seriesData) {
+      state.marketData = seriesData;
+    },
+    SET_TIME_SERIES(state, timeSeries) {
+      state.timeSeries = timeSeries;
     },
   },
   actions: {
@@ -50,7 +58,43 @@ export default new Vuex.Store({
         })
         .catch((err) => console.log(err));
     },
+    getTimeSeries({ state, commit, getters }) {
+      commit("SET_DAILY", []);
+      return axios
+        .get(`${state.apiURL}`, {
+          headers: { ...state.headers },
+          params: {
+            function: `${state.timeSeries}`,
+            symbol: state.searchResults.symbol,
+            outputsize: "compact",
+            datatype: "json",
+          },
+        })
+        .then((res) => {
+          let seriesData = Object.keys(res[getters.timeSeriesType]).map(
+            (item) => ({
+              item: res[getters.timeSeries][item],
+            })
+          );
+          seriesData = seriesData.slice(0, 100);
+          commit("SET_MARKET_DATA", seriesData);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
   },
-  getters: {},
+  getters: {
+    timeSeriesType(state) {
+      switch (state.timeSeries) {
+        case "TIME_SERIES_DAILY":
+          return "Time Series (Daily)";
+        case "TIME_SERIES_WEEKLY":
+          return "Weekly Time Series";
+        case "TIME_SERIES_MONTHLY":
+          return "Monthly Time Series";
+      }
+    },
+  },
   modules: {},
 });
