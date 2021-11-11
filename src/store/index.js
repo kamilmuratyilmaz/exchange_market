@@ -97,6 +97,7 @@ export default new Vuex.Store({
             });
             seriesData.push(obj);
           });
+          seriesData = seriesData.slice(0, 100);
           commit("SET_MARKET_DATA", seriesData);
         })
         .catch((err) => {
