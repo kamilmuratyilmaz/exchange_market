@@ -84,12 +84,19 @@ export default new Vuex.Store({
           },
         })
         .then((res) => {
-          let seriesData = Object.keys(res[state.timeSeriesTypeData]).map(
-            (index) => ({
-              item: res[state.timeSeriesTypeData][index],
-            })
-          );
-          seriesData = seriesData.slice(0, 100);
+          let apiData = res.data[state.timeSeriesTypeData];
+          let seriesData = [];
+          Object.keys(apiData).forEach((item) => {
+            let obj = new Object({
+              date: item,
+              open: apiData[item]["1. open"],
+              high: apiData[item]["2. high"],
+              low: apiData[item]["3. low"],
+              close: apiData[item]["4. close"],
+              volume: apiData[item]["5. volume"],
+            });
+            seriesData.push(obj);
+          });
           commit("SET_MARKET_DATA", seriesData);
         })
         .catch((err) => {
