@@ -18,6 +18,8 @@ export default new Vuex.Store({
     timeSeries: "TIME_SERIES_DAILY",
     timeSeriesTypeData: null,
     marketData: [],
+    routeTrack: [],
+    alertStatus: false,
   },
   mutations: {
     SET_MARKET_SEARCH_RESULT(state, companyNameSymbol) {
@@ -42,6 +44,12 @@ export default new Vuex.Store({
         case "TIME_SERIES_MONTHLY":
           return (state.timeSeriesTypeData = "Monthly Time Series");
       }
+    },
+    TRACK_ROUTE(state, route) {
+      state.routeTrack.push(route);
+    },
+    ALERT(state, status) {
+      state.alertStatus = status;
     },
   },
   actions: {
