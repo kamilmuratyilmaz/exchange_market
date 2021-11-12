@@ -10,7 +10,7 @@
 
     <v-text-field
       v-model="password"
-      :rules="[passwordRules, passwordConfirmationRule]"
+      :rules="[passwordRules, passwordCorrectRule]"
       type="password"
       label="Password"
       required
@@ -32,7 +32,7 @@ export default {
     passwordRules: [(v) => !!v || "Password is required"],
   }),
   computed: {
-    passwordConfirmationRule() {
+    passwordCorrectRule() {
       return () => this.password === "123456" || "Password must match";
     },
   },
