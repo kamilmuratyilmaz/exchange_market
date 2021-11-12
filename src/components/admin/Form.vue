@@ -10,7 +10,8 @@
 
     <v-text-field
       v-model="password"
-      :rules="passwordRules"
+      :rules="[passwordRules, passwordConfirmationRule]"
+      type="password"
       label="Password"
       required
     ></v-text-field>
@@ -30,13 +31,21 @@ export default {
     password: "123456",
     passwordRules: [(v) => !!v || "Password is required"],
   }),
+  computed: {
+    passwordConfirmationRule() {
+      return () => this.password === "123456" || "Password must match";
+    },
+  },
   methods: {
     validate() {
-      if (this.admin == "admin" && this.password == "123456") {
-        this.$store.state.alertStatus = true;
+      if (this.$refs.form.validate()) {
         this.isAdmin = true;
-      } else this.$store.state.isAdmin = false;
-      console.log(this.isAdmin);
+        console.log(this.isAdmin);
+      } else {
+        this.isAdmin = false;
+        this.$store.commit("ALERT", true);
+        this.$router.go();
+      }
     },
     reset() {
       this.$refs.form.reset();
