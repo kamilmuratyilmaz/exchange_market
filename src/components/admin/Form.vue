@@ -33,7 +33,7 @@ export default {
   methods: {
     validate() {
       if (this.admin == "admin" && this.password == "123456") {
-        this.$store.state.isAdmin = true;
+        this.$store.state.alertStatus = true;
         this.isAdmin = true;
       } else this.$store.state.isAdmin = false;
       console.log(this.isAdmin);

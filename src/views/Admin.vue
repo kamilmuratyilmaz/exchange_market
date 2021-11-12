@@ -1,15 +1,11 @@
 <template>
   <v-container>
-    <Form />
-    <!-- Vuetify v-treeview component for showing route changes and unauthorized navigation attempt to RouteLogs component-->
+    <Form :hidden="hidden" />
     <v-treeview dense hoverable :items="routeTrack">
-      <!-- This part is used to style unauthorized navigation attempt items (They will be displayed in Red)-->
       <template v-slot:label="{ item }">
-        <!-- If there is a warning property in the item(warning only exists in unauthorized navigation attempt objects) it's color is set as Red-->
         <span v-if="item.warning" style="color: red">
           {{ item.name }}
         </span>
-        <!-- If there isn't a warning property in object(normal route change items) it will be displayed normally in black-->
         <span v-else>
           {{ item.name }}
         </span>
@@ -26,14 +22,24 @@ export default {
   components: {
     Form,
   },
-  data: () => ({}),
+  data: () => ({
+    hidden: false,
+  }),
   computed: {
     ...mapState(["alertStatus"]),
     ...mapState(["routeTrack"]),
+    hidden() {
+      return this.hidden;
+    },
   },
   methods: {
     ...mapMutations(["TRACK_ROUTE"]),
     ...mapMutations(["ALERT"]),
+  },
+  watch: {
+    hidden() {
+      if (this.alertStatus == true) this.hidden = true;
+    },
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-card color="red lighten-2" dark>
-      <v-card-title class="text-h5 red lighten-3">
+    <v-card color="orange lighten" dark>
+      <v-card-title class="text-h5 orange lighten-3">
         Search for Exchange Market
       </v-card-title>
       <v-card-text>
@@ -31,7 +31,7 @@
       </v-card-text>
       <v-divider></v-divider>
       <v-expand-transition>
-        <v-list v-if="model" class="red lighten-3">
+        <v-list v-if="model" class="orange lighten-3">
           <v-list-item v-for="(field, i) in fields" :key="i">
             <v-list-item-content>
               <v-list-item-title v-text="field.value"></v-list-item-title>

@@ -26,12 +26,12 @@ export default {
     formattedStockData() {
       let dataArray = this.marketData.map((item) => {
         return {
-          Date: item[this.marketData.date],
-          Open: item[this.marketData.open],
-          High: item[this.marketData.high],
-          Low: item[this.marketData.low],
-          Close: item[this.marketData.close],
-          Volume: item[this.marketData.volume],
+          Date: Object.keys(item),
+          Open: item[Object.keys(item)].open,
+          High: item[Object.keys(item)].high,
+          Low: item[Object.keys(item)].low,
+          Close: item[Object.keys(item)].close,
+          Volume: item[Object.keys(item)].volume,
         };
       });
       return dataArray;
@@ -192,7 +192,7 @@ High: ${formatValue(Yh[i])}`;
         .attr("stroke", (i) => colors[1 + Math.sign(Yo[i] - Yc[i])]);
       if (title) g.append("title").text(title);
     },
-    //Invoking function for CanclestickChart function
+    //Invoking the CanclestickChart function with the computed formattedStockData to create the chart and add it to DOM
     makeChart() {
       this.CandlestickChart(this.formattedStockData, {
         date: (d) => new Date(d.Date),
@@ -209,9 +209,11 @@ High: ${formatValue(Yh[i])}`;
             if (index % 7 === 0) return item;
           }),
         yDomain: [
-          Math.min(...this.marketData.map((item) => item[this.marketData.low])),
+          Math.min(
+            ...this.marketData.map((item) => item[Object.keys(item)].low)
+          ),
           Math.max(
-            ...this.marketData.map((item) => item[this.marketData.high])
+            ...this.marketData.map((item) => item[Object.keys(item)].high)
           ),
         ],
         yLabel: "↑ Price ($)",
