@@ -195,11 +195,12 @@ High: ${formatValue(Yh[i])}`;
     //Invoking the CanclestickChart function with the computed formattedStockData to create the chart and add it to DOM
     makeChart() {
       this.CandlestickChart(this.marketData, {
-        date: (d) => new Date(d.Date),
-        high: (d) => d.High,
-        low: (d) => d.Low,
-        open: (d) => d.Open,
-        close: (d) => d.Close,
+        date: this.date,
+        high: this.high,
+        low: this.low,
+        open: this.open,
+        close: this.close,
+        volume: this.volume,
         xDomain: this.marketData
           .map((item) => new Date(Object.keys(item)))
           .reverse(),
@@ -209,12 +210,8 @@ High: ${formatValue(Yh[i])}`;
             if (index % 7 === 0) return item;
           }),
         yDomain: [
-          Math.min(
-            ...this.marketData.map((item) => item[Object.keys(item)].low)
-          ),
-          Math.max(
-            ...this.marketData.map((item) => item[Object.keys(item)].high)
-          ),
+          Math.min(...this.marketData.map((item) => item.low)),
+          Math.max(...this.marketData.map((item) => item.high)),
         ],
         yLabel: "↑ Price ($)",
         width: 1200,
@@ -228,6 +225,10 @@ High: ${formatValue(Yh[i])}`;
     },
     marketData() {
       console.log(this.marketData);
+      while (this.$refs.chart.firstChild) {
+        this.$refs.chart.firstChild.remove();
+      }
+      this.makeChart();
     },
   },
   mounted() {
@@ -236,5 +237,36 @@ High: ${formatValue(Yh[i])}`;
   },
 };
 </script>
-
-<style></style>
+<style scoped>
+.chart-container {
+  position: relative;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: white;
+}
+.options {
+  position: absolute;
+  top: 20px;
+  left: 35%;
+  width: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid grey;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+.option-label {
+  width: 60px;
+  text-align: center;
+}
+input {
+  display: none;
+}
+input:checked + label {
+  font-weight: bold;
+}
+label {
+  cursor: pointer;
+}
+</style>
