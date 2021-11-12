@@ -2,7 +2,7 @@
   <v-container>
     <h3>{{ sendQuery }}</h3>
     <v-btn @click="btnClick">Click</v-btn>
-    <div ref="chart"></div>
+    <div ref="chart" class="chart"></div>
   </v-container>
 </template>
 
@@ -194,7 +194,7 @@ High: ${formatValue(Yh[i])}`;
     },
     //Invoking the CanclestickChart function with the computed formattedStockData to create the chart and add it to DOM
     makeChart() {
-      this.CandlestickChart(this.formattedStockData, {
+      this.CandlestickChart(this.marketData, {
         date: (d) => new Date(d.Date),
         high: (d) => d.High,
         low: (d) => d.Low,
