@@ -229,10 +229,10 @@ High: ${formatValue(Yh[i])}`;
     marketData() {
       console.log(this.marketData);
     },
-    mounted() {
-      //Invoking the makeChart function when the component mounts
-      this.makeChart();
-    },
+  },
+  mounted() {
+    //Invoking the makeChart function when the component mounts
+    this.makeChart();
   },
 };
 </script>
