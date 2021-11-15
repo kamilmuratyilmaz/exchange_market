@@ -49,7 +49,6 @@ export default {
       console.log(this.timeSeries);
       console.log(this.$store.state.timeSeriesTypeData);
       console.log(this.$store.state.companySymbol);
-      console.log(this.marketData);
     },
     CandlestickChart(
       data,
@@ -188,11 +187,9 @@ High: ${formatValue(Yh[i])}`;
         low: (d) => d.low,
         open: (d) => d.open,
         close: (d) => d.close,
-        xDomain: this.marketData
-          .map((item) => new Date(Object.keys(item)))
-          .reverse(),
+        xDomain: this.marketData.map((item) => new Date(item.date)).reverse(),
         xTicks: this.marketData
-          .map((item) => new Date(Object.keys(item)))
+          .map((item) => new Date(item.date))
           .filter((item, index) => {
             if (index % 7 === 0) return item;
           }),
