@@ -15,8 +15,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(["marketData"]),
-    ...mapState(["timeSeries"]),
+    ...mapState(["marketData", "timeSeries"]),
     sendQuery() {
       return this.$route.query.view;
     },
@@ -25,11 +24,12 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["timeSeriesType"]),
-    ...mapActions(["companySymbolFromID"]),
-    ...mapActions(["getTimeSeriesData"]),
-    ...mapMutations(["SET_MARKET_DATA"]),
-    ...mapMutations(["SET_TIME_SERIES"]),
+    ...mapActions([
+      "timeSeriesType",
+      "companySymbolFromID",
+      "getTimeSeriesData",
+    ]),
+    ...mapMutations(["SET_MARKET_DATA", "SET_TIME_SERIES"]),
     btnClick() {
       this.getTimeSeriesData();
     },
@@ -206,6 +206,7 @@ High: ${formatValue(Yh[i])}`;
   watch: {
     sendQuery() {
       this.checkTimeSeriesFromQuery();
+      this.getTimeSeriesData();
     },
     marketData() {
       console.log(this.marketData);
@@ -217,6 +218,8 @@ High: ${formatValue(Yh[i])}`;
   },
   mounted() {
     //Invoking the makeChart function when the component mounts
+    this.checkTimeSeriesFromQuery();
+    this.getTimeSeriesData();
     this.makeChart();
   },
 };
