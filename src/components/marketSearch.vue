@@ -75,8 +75,7 @@ export default {
         };
       });
     },
-    ...mapState(["searchResults"]),
-    ...mapState(["companyKeyword"]),
+    ...mapState(["searchResults", "companyKeyword"]),
   },
   methods: {
     ...mapActions(["getCompanySearchResult"]),
