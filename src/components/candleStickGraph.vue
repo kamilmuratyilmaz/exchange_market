@@ -183,7 +183,7 @@ High: ${formatValue(Yh[i])}`;
     //Invoking the CanclestickChart function with the computed marketData to create the chart and add it to DOM
     makeChart() {
       this.CandlestickChart(this.marketData, {
-        date: (date) => new Date(date.date),
+        date: (d) => new Date(d.date),
         high: (d) => d.high,
         low: (d) => d.low,
         open: (d) => d.open,
