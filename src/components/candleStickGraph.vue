@@ -228,35 +228,10 @@ High: ${formatValue(Yh[i])}`;
 };
 </script>
 <style scoped>
-.chart-container {
+.chart {
   position: relative;
   padding: 30px;
   border-radius: 10px;
   background-color: white;
-}
-.options {
-  position: absolute;
-  top: 20px;
-  left: 35%;
-  width: 550px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid grey;
-  border-radius: 20px;
-  padding: 10px 20px;
-}
-.option-label {
-  width: 60px;
-  text-align: center;
-}
-input {
-  display: none;
-}
-input:checked + label {
-  font-weight: bold;
-}
-label {
-  cursor: pointer;
 }
 </style>

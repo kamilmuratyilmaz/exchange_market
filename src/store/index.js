@@ -78,7 +78,7 @@ export default new Vuex.Store({
           console.log(state.searchResults);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
           alert(
             "You have reached API request limit, please try again after 1 minute"
           );
