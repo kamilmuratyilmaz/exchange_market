@@ -76,7 +76,7 @@ export default {
         yFormat = "~f", // a format specifier for the value on the y-axis
         yLabel, // a label for the y-axis
         stroke = "currentColor", // stroke color for the daily rule
-        strokeLinecap = "round", // stroke line cap for the rules
+        strokeLinecap = "square", // stroke line cap for the rules
         colors = ["#4daf4a", "#999999", "#e41a1c"], // [up, no change, down]
       } = {}
     ) {
