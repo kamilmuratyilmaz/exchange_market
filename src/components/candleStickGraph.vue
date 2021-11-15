@@ -23,19 +23,6 @@ export default {
     sendId() {
       return this.$route.params.id;
     },
-    formattedStockData() {
-      let dataArray = this.marketData.map((item) => {
-        return {
-          Date: Object.keys(item),
-          Open: item[Object.keys(item)].open,
-          High: item[Object.keys(item)].high,
-          Low: item[Object.keys(item)].low,
-          Close: item[Object.keys(item)].close,
-          Volume: item[Object.keys(item)].volume,
-        };
-      });
-      return dataArray;
-    },
   },
   methods: {
     ...mapActions(["timeSeriesType"]),
@@ -62,6 +49,7 @@ export default {
       console.log(this.timeSeries);
       console.log(this.$store.state.timeSeriesTypeData);
       console.log(this.$store.state.companySymbol);
+      console.log(this.marketData);
     },
     CandlestickChart(
       data,
@@ -192,15 +180,14 @@ High: ${formatValue(Yh[i])}`;
         .attr("stroke", (i) => colors[1 + Math.sign(Yo[i] - Yc[i])]);
       if (title) g.append("title").text(title);
     },
-    //Invoking the CanclestickChart function with the computed formattedStockData to create the chart and add it to DOM
+    //Invoking the CanclestickChart function with the computed marketData to create the chart and add it to DOM
     makeChart() {
       this.CandlestickChart(this.marketData, {
-        date: this.date,
-        high: this.high,
-        low: this.low,
-        open: this.open,
-        close: this.close,
-        volume: this.volume,
+        date: (date) => new Date(date.date),
+        high: (d) => d.high,
+        low: (d) => d.low,
+        open: (d) => d.open,
+        close: (d) => d.close,
         xDomain: this.marketData
           .map((item) => new Date(Object.keys(item)))
           .reverse(),
