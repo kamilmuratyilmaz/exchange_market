@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <h3>{{ sendQuery }}</h3>
     <v-btn @click="btnClick">Click</v-btn>
     <div ref="chart" class="chart"></div>
   </v-container>
@@ -15,7 +14,12 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(["marketData", "timeSeries"]),
+    ...mapState([
+      "marketData",
+      "timeSeries",
+      "timeSeriesTypeData",
+      "companySymbol",
+    ]),
     sendQuery() {
       return this.$route.query.view;
     },
@@ -47,8 +51,8 @@ export default {
           break;
       }
       console.log(this.timeSeries);
-      console.log(this.$store.state.timeSeriesTypeData);
-      console.log(this.$store.state.companySymbol);
+      console.log(this.timeSeriesTypeData);
+      console.log(this.companySymbol);
     },
     CandlestickChart(
       data,
@@ -209,7 +213,6 @@ High: ${formatValue(Yh[i])}`;
       this.getTimeSeriesData();
     },
     marketData() {
-      console.log(this.marketData);
       while (this.$refs.chart.firstChild) {
         this.$refs.chart.firstChild.remove();
       }
