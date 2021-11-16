@@ -1,6 +1,6 @@
-
-
 # exchange-market
+
+## [Demo](https://exchange-market.netlify.app/)
 
 <img src="https://raw.githubusercontent.com/kamilmuratyilmaz/exchange_market/deploy/exchange-market.gif" alt="exchange-market" width="600" />
 
