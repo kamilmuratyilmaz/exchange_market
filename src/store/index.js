@@ -18,6 +18,8 @@ export default new Vuex.Store({
     timeSeries: "TIME_SERIES_DAILY",
     timeSeriesTypeData: null,
     marketData: [],
+    routeTrack: [],
+    alertStatus: false,
   },
   mutations: {
     SET_MARKET_SEARCH_RESULT(state, companyNameSymbol) {
@@ -42,6 +44,12 @@ export default new Vuex.Store({
         case "TIME_SERIES_MONTHLY":
           return (state.timeSeriesTypeData = "Monthly Time Series");
       }
+    },
+    TRACK_ROUTE(state, route) {
+      state.routeTrack.push(route);
+    },
+    ALERT(state, status) {
+      state.alertStatus = status;
     },
   },
   actions: {
@@ -69,7 +77,12 @@ export default new Vuex.Store({
           commit("SET_MARKET_SEARCH_RESULT", companyNameSymbol.slice(0, 5));
           console.log(state.searchResults);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.error(err);
+          alert(
+            "You have reached API request limit, please try again after 1 minute"
+          );
+        });
     },
     getTimeSeriesData({ state, commit }) {
       commit("SET_MARKET_DATA", []);
@@ -97,10 +110,14 @@ export default new Vuex.Store({
             });
             seriesData.push(obj);
           });
+          seriesData = seriesData.slice(0, 100);
           commit("SET_MARKET_DATA", seriesData);
         })
         .catch((err) => {
           console.error(err);
+          alert(
+            "You have reached API request limit, please try again after 1 minute"
+          );
         });
     },
     companySymbolFromID({ commit }, id) {

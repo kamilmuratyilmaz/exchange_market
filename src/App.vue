@@ -38,7 +38,15 @@ export default {
 
   watch: {
     $route(to, from) {
-      console.log(to, from);
+      let routeTrack = {
+        name: `${new Date().toLocaleString("en-US")}`,
+        children: [
+          { name: `From : ${from.fullPath}` },
+          { name: `To : ${to.fullPath}` },
+        ],
+      };
+      this.$store.commit("TRACK_ROUTE", routeTrack);
+      console.log(routeTrack);
     },
   },
 };
